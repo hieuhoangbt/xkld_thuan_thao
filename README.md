@@ -1,8 +1,9 @@
 # xkld_thuan_thao
 Website wp XKLD THUAN THAO
 
-# Update wp-config.php
+# Install at local
 - Install wordpress
+- Do not push core files if unnecessary
 
 # HTML
 - Directory: html/
