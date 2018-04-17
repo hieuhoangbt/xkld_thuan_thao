@@ -50,14 +50,14 @@ class HDThuanThaoPosttype
 
         //Register columns
         add_filter('manage_recruitment_posts_columns', array($instance, 'register_columns_recruitment'));
-        add_filter('manage_register_information_posts_columns', array($instance, 'register_columns_register_information'));
+        add_filter('manage_information_posts_columns', array($instance, 'register_columns_information'));
         add_filter('manage_registration_form_posts_columns',
             array($instance, 'register_columns_registration_form'));
 
 
         //Display list product
         add_action('manage_recruitment_posts_custom_column', array($instance, 'list_recruitment'), 10, 2);
-        add_action('manage_register_information_posts_custom_column', array($instance, 'list_register_information'), 10, 2);
+        add_action('manage_register_information_posts_custom_column', array($instance, 'list_information'), 10, 2);
         add_action('manage_registration_form_posts_custom_column',
             array($instance, 'list_registration_form'), 10, 2);
 
@@ -219,7 +219,7 @@ class HDThuanThaoPosttype
 //            )
         );
 
-        register_post_type('register-information', $args);
+        register_post_type('information', $args);
 
         //register post type upload registration statement
         $labels = array(
@@ -289,10 +289,6 @@ class HDThuanThaoPosttype
             $data = get_post_meta($post->ID, 'recruitment')[0];
             require_once PLG_PLUGIN_DIR . '/views/backend/recruitment.php';
         }, 'recruitment', 'normal', 'core');
-        add_meta_box('register-information', __('Custom Info', 'hdthuanthao'), function ($post) {
-            $data = get_post_meta($post->ID, 'register-information')[0];
-            require_once PLG_PLUGIN_DIR . '/views/backend/register-information.php';
-        }, 'service', 'normal', 'core');
         add_meta_box('registrationform', __('Custom Info', 'hdthuanthao'), function ($post) {
             $data = get_post_meta($post->ID, 'registrationform')[0];
             require_once PLG_PLUGIN_DIR . '/views/backend/registration-form.php';
@@ -313,7 +309,7 @@ class HDThuanThaoPosttype
         return $columns;
     }
 
-    public static function register_columns_register_information($columns)
+    public static function register_columns_information($columns)
     {
         $columns = array(
             'cb' => $columns['cb'],
@@ -322,6 +318,7 @@ class HDThuanThaoPosttype
             'phone_number' => 'Phone Number',
             'email' => 'Email',
             'introduce' => 'Introduce',
+            'document' => 'Document',
         );
         return $columns;
     }
@@ -343,6 +340,22 @@ class HDThuanThaoPosttype
             case 'content':
                 echo get_the_content($post_id, 'content');
                 break;
+            case 'company_name':
+                echo $data['company_name'];
+                break;
+            case 'office_address':
+                echo $data['office_address'];
+                break;
+        }
+    }
+
+    public static function list_register_information($columns, $post_id)
+    {
+        $data = get_post_meta($post_id, 'registerinformation')[0];
+        switch ($columns) {
+            case 'full_name':
+                echo $data['full_name'];
+                break;
             case 'address':
                 echo $data['address'];
                 break;
@@ -355,20 +368,8 @@ class HDThuanThaoPosttype
             case 'introduce':
                 echo $data['introduce'];
                 break;
-        }
-    }
-    public static function list_register_information($columns, $post_id)
-    {
-        $data = get_post_meta($post_id, 'register-information')[0];
-        switch ($columns) {
-            case 'full_name':
-                echo $data['full_name'];
-                break;
-            case 'company_name':
-                echo $data['company_name'];
-                break;
-            case 'office_address':
-                echo $data['office_address'];
+            case 'introduce':
+                echo '<a href="' . $data['document'] . '">Download Document</a>';
                 break;
         }
     }
