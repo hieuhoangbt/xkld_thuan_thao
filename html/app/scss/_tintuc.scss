@@ -1,0 +1,23 @@
+.cards_result {
+  //border: solid 1px red;
+  padding: 15px 15px 0px 15px;
+  .cards {
+    .item {
+      width: 50%;
+    }
+  }
+  .card-hightlight {
+    margin-bottom: 5px;
+    //border: solid 1px red;
+    overflow: hidden;
+  }
+}
+.detail_ders {
+  //border: solid 1px red;
+  padding: 30px 15px;
+  img {
+    display: block;
+    width: 100%;
+    margin: 15px auto;
+  }
+}

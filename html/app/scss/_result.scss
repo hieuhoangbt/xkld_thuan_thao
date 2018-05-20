@@ -1,0 +1,121 @@
+.search-result {
+  //border: solid 1px red;
+  padding: 30px 0px 0px 0px;
+  .form-search {
+    .bg-white {
+      background: rgba(0, 102, 204, 1);
+    }
+  }
+}
+
+.orders {
+  &.order_resutls {
+    .item-order {
+      background: #fff;
+      padding: 15px;
+      .thumb_ders {
+        ._title {
+          a {
+            color: #ffac00;
+            font-weight: 400;
+            font-size: 16px;
+          }
+        }
+      }
+      .thumb_img {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+  }
+}
+
+._section {
+  &--content {
+    //border: solid 1px red;
+    display: flex;
+    margin: 30px -15px 30px -15px;
+    .left_content, .right_sidebar {
+      padding: 0px 15px;
+    }
+    .left_content {
+      width: 70%;
+    }
+    .right_sidebar {
+      width: 30%;
+    }
+  }
+}
+
+.box-content-thumb {
+  background: #fff;
+  border-top: solid 2px #004080;
+  padding: 15px 0px 0px 0px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  h4._title {
+    color: #004080;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 1.3em;
+    font-weight: bold;
+    padding: 0px 15px 15px 15px;
+    border-bottom: solid 2px #f2f6f9;
+
+  }
+  .collection {
+    border: none;
+    &--content {
+      .collection-item {
+        border-color: #f2f6f9;
+        border-width: 2px;
+        .circle {
+
+        }
+        .title {
+          display: block;
+          margin-bottom: 15px;
+          a {
+            color: #000;
+            transition: all 0.25s linear;
+            &:hover {
+              color: #ffac00;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+.icon_asw {
+  a, img {
+    display: block;
+    margin: 0 auto;
+  }
+  a {
+    padding: 15px;
+  }
+}
+.pagi_result {
+  margin: 10px 0px;
+  float: left;
+  width: 100%;
+  //border: solid 1px red;
+  .pagination li.active {
+    background: #ffac00;
+  }
+}
+.table_detail {
+  margin: 30px 0px;
+  td:nth-child(1) {
+    width: 30%;
+  }
+}
+.box-content-thumb h4._title {
+  &.color-title {
+    color: #ffac00;
+
+  }
+}

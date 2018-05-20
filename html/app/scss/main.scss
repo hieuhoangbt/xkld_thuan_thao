@@ -1,0 +1,34 @@
+/*default*/
+@import 'varible';
+@import 'reset';
+@import 'fonts';
+@import 'master';
+/*component*/
+/*page*/
+@import 'home';
+@import 'result';
+@import 'tintuc';
+
+
+html {
+    -webkit-font-smoothing: antialiased;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+a {
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        outline: none;
+    }
+}
+
+button {
+    &:focus {
+        outline: none !important;
+    }
+}
