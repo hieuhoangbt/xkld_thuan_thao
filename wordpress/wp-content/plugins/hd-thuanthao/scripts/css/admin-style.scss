@@ -1,0 +1,54 @@
+.qhshop-box-left {
+	float:left;
+	width: 20%;
+	margin-left: -12px;
+	margin-bottom: -12px;
+	margin-top: -6px;
+	ul.qhshop-box-menu {
+		margin-top: -1px;		
+		margin-bottom: 0px;		
+		li {
+			position: relative;
+			border-top: 1px solid #eee;
+			margin-bottom: 0px;
+			a{
+				display: block;
+				padding: 12px;
+				text-decoration: none;
+				font-weight: bold;
+				font-size: 15px;
+			}
+			a:hover {
+				background: #f5f5f5;
+			}
+		}
+	}
+}
+
+.qhshop-box-right {
+	float:left;
+	width: 79%;
+	padding: 11px;
+	padding-right: 0px;
+	margin-top: -6px;
+        margin-bottom: -12px;
+        border-left: 1px solid #eee;
+	font-size: 15px;
+	.qhshop-content-form-group {
+		label {
+			display: inline-block;
+			width: 150px;
+		}
+		margin-bottom: 5px;
+      .small-text {
+        width: 120px;
+      }
+	}
+
+
+	//For JS
+	#qhshop-content-attribute {
+		display:none;
+	}
+}
+
