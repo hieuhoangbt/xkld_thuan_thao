@@ -1,0 +1,23 @@
+p, h1,h2,h3,h4,h5,h6 {
+  margin: 0rem 0rem 0rem 0rem;
+}
+#page {
+  //overflow: hidden;
+  //float: left;
+  //width: 100%;
+  //min-height: 100vh;
+}
+img {
+  display: block;
+  max-width: 100%;
+
+}
+.pos-relative {
+  position: relative;
+}
+* {
+  -webkit-overflow-scrolling: touch !important;
+  -ms-touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch !important;
+  box-sizing: border-box;
+}
