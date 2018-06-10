@@ -1,0 +1,31 @@
+.box_dash_link {
+  border: 1px #0066cc dashed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  cursor: pointer;
+  &--img {
+    margin-right: 10px;
+  }
+}
+.content_file_cv {
+  padding: 15px;
+  &--down {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    .box_dash_link {
+      max-width: 50%;
+    }
+  }
+}
+.text_smaller {
+  margin-bottom: 15px;
+}
+.btn_submit {
+  display: block;
+  margin: 15px auto 0px auto;
+  background: #ffac00;
+  box-shadow: none;
+}
