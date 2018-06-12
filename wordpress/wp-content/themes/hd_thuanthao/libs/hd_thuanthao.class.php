@@ -7,14 +7,14 @@ class HD_ThuanThao_theme
     {
         add_action('after_setup_theme', function () {
             add_theme_support('post-thumbnails');
-            add_image_size('share_thumbnail', 180, 180, array('center', 'center'));
-            add_image_size('doctor_thumbnail', 220, 286, array('center', 'center'));
+            add_image_size('recruitment_thumbnail', 168, 126, array('center', 'center'));
+            add_image_size('highlight_thumbnail', 356, 267, array('center', 'center'));
         });
         //Register menu
         add_action('init', function () {
             register_nav_menu('primary', __('HD ThuanThao Menu', 'thuanthao'));
         });
-        add_action('wp_enqueue_scripts', function() {
+        add_action('wp_enqueue_scripts', function () {
             //Insert style
             wp_register_style('main', HD_THUANTHAO_THEME_URL . '/assets//css/main.css');
             wp_enqueue_style('main');
@@ -30,8 +30,30 @@ class HD_ThuanThao_theme
         add_filter('nav_menu_css_class', 'special_nav_class', 10, 2);
     }
 
-    public static function hd_thuanthao_logo() {
-        printf('<a href="%s" class="brand-logo"><img src="%s" alt="%s"/></a>', get_home_url('/'), HD_THUANTHAO_THEME_URL . '/assets/images/logo.png', get_bloginfo('name'));
+    public static function hd_thuanthao_logo()
+    {
+        printf('<a href="%s" class="brand-logo"><img src="%s" alt="%s"/></a>', get_home_url('/'),
+            HD_THUANTHAO_THEME_URL . '/assets/images/logo.png', get_bloginfo('name'));
+    }
+
+    public static function hd_thuanthao_facebook_logo()
+    {
+        printf('<a href="%s"><img src="%s" alt="%s"/></a>',
+            "#", HD_THUANTHAO_THEME_URL . '/assets/images/facebook-logo-button.svg',
+            get_bloginfo('name'));
+    }
+    public static function hd_thuanthao_banner()
+    {
+        printf('<img class="banner_home--thumb" src="%s" alt="%s"/>',
+            HD_THUANTHAO_THEME_URL . '/assets/images/banner.jpg',
+            get_bloginfo('name'));
+    }
+
+    public static function hd_thuanthao_instagram_logo()
+    {
+        printf('<a href="%s"><img src="%s" alt="%s"/></a>',
+            "#", HD_THUANTHAO_THEME_URL . '/assets/images/instagram-logo.svg',
+            get_bloginfo('name'));
     }
 
     public static function hd_thuanthao_menu()
@@ -42,10 +64,10 @@ class HD_ThuanThao_theme
             'depth' => 1,
             'container' => 'ul',
             'container_class' => '',
-            'menu_class' => 'right hide-on-med-and-down',
-            'menu_id' => 'nav-mobile',
+            'menu_class' => 'right hide - on - med -and-down',
+            'menu_id' => 'nav - mobile',
             'walker' => new wp_bootstrap_navwalker(),
-            'echo' => false,
+            'echo ' => false,
         ));
     }
 
