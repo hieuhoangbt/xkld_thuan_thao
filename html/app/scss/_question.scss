@@ -1,0 +1,52 @@
+.form_question {
+  //border: solid 1px red;
+  padding: 15px 15px 30px 15px;
+  overflow: hidden;
+  textarea {
+    resize: none;
+    height: auto;
+    border: solid 1px #cbdae8;
+  }
+  input.validate {
+    border: solid 1px #cbdae8;
+    margin-bottom: 0px;
+  }
+  .btn_submit {
+    float: right;
+    background: #ffac00;
+    box-shadow: none;
+  }
+  label {
+    color: #001a33;
+    span {color: red;}
+  }
+}
+
+.question_list {
+  .item {
+    //border: solid 1px red;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #cbdae8;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+    ._title {
+      background: url("../images/icon_qs.png") no-repeat 0px 0px;
+      padding: 4px 40px ;
+      font-size: 18px;
+      color: #000000;
+      //font-style: italic;
+      span {
+        &.user_qs {
+          color: #ffac00;
+          font-size: 16px;
+        }
+      }
+    }
+    ._answer_qs {
+      padding: 0px 0px 0px 40px;
+
+    }
+  }
+}
