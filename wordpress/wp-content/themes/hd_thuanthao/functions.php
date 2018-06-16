@@ -7,4 +7,3 @@ define('HD_THUANTHAO_THEME_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/la
 require_once 'libs/hd_thuanthao.class.php';
 require_once 'wp_bootstrap_navwalker.php';
 HD_ThuanThao_theme::run();
-

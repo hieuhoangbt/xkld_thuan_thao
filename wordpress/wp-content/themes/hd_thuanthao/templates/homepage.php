@@ -14,7 +14,7 @@ $params_filter_recruitment = array(
 $recruitments = new WP_Query($params_filter_recruitment);
 
 $params_filter_post = array(
-    'posts_per_page' => 3,
+    'posts_per_page' => 1,
     'post_type' => 'post',
     'post_status' => 'publish',
     'orderby' => 'post_date',
@@ -81,9 +81,10 @@ $posts = new WP_Query($params_filter_post);
                     wp_reset_query();
                 }
                 ?>
+                <input type="hidden" id="recruitment-append">
             </div>
             <div class="text-center">
-                <a class="btn-loadmore" href="#">xem thêm</a>
+                <a class="btn-loadmore recruitment-load-more" href="#">xem thêm</a>
             </div>
         </div>
     </div>
@@ -153,9 +154,10 @@ $posts = new WP_Query($params_filter_post);
                     wp_reset_query();
                 }
                 ?>
+                <input type="hidden" id="news-append">
             </div>
             <div class="text-center load_card">
-                <a class="btn-loadmore" href="#">xem thêm</a>
+                <a class="btn-loadmore news-load-more" href="#">xem thêm</a>
             </div>
         </div>
     </div>
