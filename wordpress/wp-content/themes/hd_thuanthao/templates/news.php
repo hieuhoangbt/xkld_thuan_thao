@@ -2,7 +2,46 @@
 /*
  * Template Name: Tin Tức
  */
+if (get_query_var('paged')) {
+    $paged = get_query_var('paged');
+} else {
+    if (get_query_var('page')) {
+        $paged = get_query_var('page');
+    } else {
+        $paged = 1;
+    }
+}
 get_header();
+$params_filter_news_and_event = array(
+    'posts_per_page' => 7,
+    'post_type' => 'post',
+    'category_name' => 'tin-tuc-va-su-kien',
+    'post_status' => 'publish',
+    'orderby' => 'post_date',
+    'order' => 'DESC',
+    'paged' => $paged
+);
+$newsEvent = new WP_Query($params_filter_news_and_event);
+//Get data of study abroad
+$params_filter_study_abroad = array(
+    'posts_per_page' => 5,
+    'post_type' => 'post',
+    'category_name' => 'cam-nang-lao-dong-du-hoc-nhat-ban',
+    'post_status' => 'publish',
+    'orderby' => 'post_date',
+    'order' => 'DESC',
+);
+$studyAbroad = new WP_Query($params_filter_study_abroad);
+//get data of advisory
+$params_filter_advisory = array(
+    'posts_per_page' => 5,
+    'post_type' => 'post',
+    'category_name' => 'tu-van-du-hoc-nhat-ban',
+    'post_status' => 'publish',
+    'orderby' => 'post_date',
+    'order' => 'DESC',
+);
+$advisory = new WP_Query($params_filter_advisory);
 ?>
     <main class="content">
         <div class="container">
@@ -11,158 +50,69 @@ get_header();
                     <div class="box-content-thumb">
                         <h4 class="_title">tin tức & sự kiện</h4>
                         <div class="cards_result">
-                            <div class="card-hightlight">
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="images/tintuc-hl.png">
-                                        </div>
-                                        <div class="card-content">
-                                            <span class="card-title">
-                                                <a href="#">
-    Các phương tiện giao thông
-                                                    phổ biến tại Nhật Bản
-(Phần 1 – Tàu điện)
+                            <?php
+                            if ($newsEvent->have_posts()) {
+                                $postCount = 1;
+                                $outputList = '';
+                                $output = '';
+                                while ($newsEvent->have_posts()) {
+                                    $newsEvent->the_post();
+                                    if ($postCount == 1) {
+                                        $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()),
+                                            "news_thumbnail");
 
-                                                </a>
-                                            </span>
-                                            <p>
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                trong các trường tiểu học, trung học cơ sở và trung tâm...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        $output .= '<div class="card-hightlight">';
+                                        $output .= '<div class="item">';
+                                        $output .= '<div class="card">';
+                                        $output .= '<div class="card-image">';
+                                        $output .= '<img src="' . $image[0] . '">';
+                                        $output .= '</div>';
+                                        $output .= '<div class="card-content">';
+                                        $output .= '<span class="card-title">';
+                                        $output .= ' <a href="'. get_the_permalink().'">';
+                                        $output .= get_the_title();
+                                        $output .= '</a>';
+                                        $output .= '</span>';
+                                        $output .= '<p>';
+                                        $output .= wp_trim_words(get_the_content(), 50, '...');
+                                        $output .= '</div>';
+                                        $output .= '</div>';
+                                        $output .= '</div>';
+                                        $output .= '</div>';
+                                    } else {
+                                        $imageList = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()),
+                                            "highlight_thumbnail");
+                                        $outputList .= '<div class="item">';
+                                        $outputList .= '<div class="card">';
+                                        $outputList .= '<div class="card-image" >';
+                                        $outputList .= '<img src = "' . $imageList[0] . '" >';
+                                        $outputList .= '</div >';
+                                        $outputList .= '<div class="card-content" >';
+                                        $outputList .= '<span class="card-title" >';
+                                        $outputList .= '<a href = "'. get_the_permalink().'" >' . get_the_title() . '</a ></span >';
+                                        $outputList .= '<p >';
+                                        $outputList .= wp_trim_words(get_the_content(), 50, '...');
+                                        $outputList .= '</p >';
+                                        $outputList .= '</div >';
+                                        $outputList .= '</div >';
+                                        $outputList .= '</div >';
+                                    }
+                                    $postCount++;
+                                }
+                                wp_reset_query();
+                            }
+                            echo $output;
+                            ?>
                             <div class="cards">
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="https://materializecss.com/images/sample-1.jpg">
-                                        </div>
-                                        <div class="card-content">
-                        <span class="card-title">
-                            <a href="#">P2317HNhật Bản quy định sử dụng sách giáo khoa điện tử từ năm 2020</a>
-                        </span>
-                                            <p>
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                trong các trường tiểu học, trung học cơ sở và trung tâm...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="https://materializecss.com/images/sample-1.jpg">
-                                        </div>
-                                        <div class="card-content">
-                        <span class="card-title">
-                            <a href="#">P2317HNhật Bản quy định sử dụng sách giáo khoa điện tử từ năm 2020</a>
-                        </span>
-                                            <p>
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                trong các trường tiểu học, trung học cơ sở và trung tâm...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="https://materializecss.com/images/sample-1.jpg">
-                                        </div>
-                                        <div class="card-content">
-                        <span class="card-title">
-                            <a href="#">P2317HNhật Bản quy định sử dụng sách giáo khoa điện tử từ năm 2020</a>
-                        </span>
-                                            <p>
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                trong các trường tiểu học, trung học cơ sở và trung tâm...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="https://materializecss.com/images/sample-1.jpg">
-                                        </div>
-                                        <div class="card-content">
-                        <span class="card-title">
-                            <a href="#">P2317HNhật Bản quy định sử dụng sách giáo khoa điện tử từ năm 2020</a>
-                        </span>
-                                            <p>
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                trong các trường tiểu học, trung học cơ sở và trung tâm...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="https://materializecss.com/images/sample-1.jpg">
-                                        </div>
-                                        <div class="card-content">
-                        <span class="card-title">
-                            <a href="#">P2317HNhật Bản quy định sử dụng sách giáo khoa điện tử từ năm 2020</a>
-                        </span>
-                                            <p>
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                trong các trường tiểu học, trung học cơ sở và trung tâm...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="https://materializecss.com/images/sample-1.jpg">
-                                        </div>
-                                        <div class="card-content">
-                        <span class="card-title">
-                            <a href="#">P2317HNhật Bản quy định sử dụng sách giáo khoa điện tử từ năm 2020</a>
-                        </span>
-                                            <p>
-                                                Nội các Nhật Bản mới đây đã đề xuất dự luật cho phép sử dụng sách giáo
-                                                khoa
-                                                điện tử
-                                                trong các trường tiểu học, trung học cơ sở và trung tâm...
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php echo $outputList; ?>
                             </div>
                         </div>
                         <div class="text-center pagi_result">
                             <ul class="pagination">
-                                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                                <li class="active"><a href="#!">1</a></li>
-                                <li class="waves-effect"><a href="#!">2</a></li>
-                                <li class="waves-effect"><a href="#!">3</a></li>
-                                <li class="waves-effect"><a href="#!">4</a></li>
-                                <li class="waves-effect"><a href="#!">5</a></li>
-                                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a>
-                                </li>
+                                <?php
+                                $total = $newsEvent->max_num_pages;
+                                HD_ThuanThao_theme::pagination($total, $paged);
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -174,7 +124,7 @@ get_header();
                         </h4>
                         <div class="icon_asw">
                             <a href="#">
-                                <img src="images/hoidap.png" alt=""/>
+                                <img src="<?php echo HD_THUANTHAO_THEME_URL . '/assets/images/hoidap.png' ?>" alt=""/>
                             </a>
                         </div>
                     </div>
@@ -183,109 +133,61 @@ get_header();
                             cẩm nang lao động du học nhật bản
                         </h4>
                         <ul class="collection collection--content">
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
+                            <?php
+                            if ($studyAbroad->have_posts()) {
+                                while ($studyAbroad->have_posts()) {
+                                    $studyAbroad->the_post();
+                                    $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()),
+                                        "recruitment_thumbnail");
+                                    ?>
+                                    <li class="collection-item avatar">
+                                        <img src="<?php echo $image[0]; ?>" alt="" class="circle">
+                                        <span class="title">
+                                    <a href="<?php echo the_permalink(); ?>">
+                                        <?php echo get_the_title(); ?>
                                     </a>
                                 </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="#">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
+                                        <p class="ders">
+                                            <?php echo wp_trim_words(get_the_content(), 15, '...'); ?>
+                                        </p>
+                                    </li>
+                                    <?php
+                                }
+                                wp_reset_query();
+                            }
+                            ?>
+
                         </ul>
                     </div>
+
                     <div class="box-content-thumb">
                         <h4 class="_title">
                             tư vấn du học nhật bản
                         </h4>
                         <ul class="collection collection--content">
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
+                            <?php
+                            if ($advisory->have_posts()) {
+                                while ($advisory->have_posts()) {
+                                    $advisory->the_post();
+                                    $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()),
+                                        "recruitment_thumbnail");
+                                    ?>
+                                    <li class="collection-item avatar">
+                                        <img src="<?php echo $image[0]; ?>" alt="" class="circle">
+                                        <span class="title">
+                                    <a href="<?php echo the_permalink(); ?>">
+                                        <?php echo get_the_title(); ?>
                                     </a>
                                 </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="#">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
-                            <li class="collection-item avatar">
-                                <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                                <span class="title">
-                                    <a href="">
-    Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                                <p class="ders">
-                                    Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                    giờ làm thêm tối đa đối với du học sinh...
-                                </p>
-                            </li>
+                                        <p class="ders">
+                                            <?php echo wp_trim_words(get_the_content(), 15, '...'); ?>
+                                        </p>
+                                    </li>
+                                    <?php
+                                }
+                                wp_reset_query();
+                            }
+                            ?>
                         </ul>
                     </div>
 
