@@ -3,23 +3,23 @@
  * Template Name: Trang chủ
  */
 get_header();
+$recruitmentPerPage = 3;
 $params_filter_recruitment = array(
-    'posts_per_page' => 3,
+    'posts_per_page' => $recruitmentPerPage,
     'post_type' => 'recruitment',
     'post_status' => 'publish',
     'orderby' => 'post_date',
     'order' => 'DESC',
-    'paged' => $paged
 );
 $recruitments = new WP_Query($params_filter_recruitment);
 
+$newsPerPage = 3;
 $params_filter_post = array(
-    'posts_per_page' => 1,
+    'posts_per_page' => $newsPerPage,
     'post_type' => 'post',
     'post_status' => 'publish',
     'orderby' => 'post_date',
     'order' => 'DESC',
-    'paged' => $paged
 );
 $posts = new WP_Query($params_filter_post);
 ?>
@@ -83,9 +83,11 @@ $posts = new WP_Query($params_filter_post);
                 ?>
                 <input type="hidden" id="recruitment-append">
             </div>
-            <div class="text-center">
-                <a class="btn-loadmore recruitment-load-more" href="#">xem thêm</a>
-            </div>
+            <?php if (wp_count_posts('recruitment')->publish > $recruitmentPerPage) { ?>
+                <div class="text-center">
+                    <a class="btn-loadmore recruitment-load-more" href="#">xem thêm</a>
+                </div>
+            <?php } ?>
         </div>
     </div>
     <div class="bg-gray">
@@ -156,9 +158,11 @@ $posts = new WP_Query($params_filter_post);
                 ?>
                 <input type="hidden" id="news-append">
             </div>
+            <?php if (wp_count_posts('post')->publish > $newsPerPage) { ?>
             <div class="text-center load_card">
                 <a class="btn-loadmore news-load-more" href="#">xem thêm</a>
             </div>
+            <?php } ?>
         </div>
     </div>
 </main>

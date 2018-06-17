@@ -9,6 +9,7 @@ class HD_ThuanThao_theme
             add_theme_support('post-thumbnails');
             add_image_size('recruitment_thumbnail', 168, 126, array('center', 'center'));
             add_image_size('highlight_thumbnail', 356, 267, array('center', 'center'));
+            add_image_size('news_thumbnail', 737, 458, array('center', 'center'));
         });
         //Register menu
         add_action('init', function () {
@@ -90,6 +91,78 @@ class HD_ThuanThao_theme
             'walker' => new wp_bootstrap_navwalker(),
             'echo ' => false,
         ));
+    }
+
+    public static function pagination($total, $paged){
+        if($total > 1){
+            $next = $paged + 1;
+            $pre = $paged - 1;
+            $firstPaged = 1;
+            $lastPaged = $total;
+            $displayLastPage = true;
+            //Pre button
+            if($paged > 1){
+                echo '<li><a href=" ' . get_permalink() . '?page=' . $pre . '"><i class="material-icons">chevron_left</i></a></li>';
+            }
+            /**
+             * Paging
+             */
+            if($total < 5){
+                for($i = 1; $i <= $total; $i++){
+                    if ($i == $paged) {
+                        echo '<li class="active"><a>' . $i . '</a></li>';
+                    }else{
+                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $i . '">' . $i . '</a></li>';
+                    }
+                }
+            }else{
+                if($paged >= 1){
+                    if ($firstPaged == $paged) {
+                        echo '<li class="active"><a>' . $firstPaged . '</a></li>';
+                    }else{
+                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $firstPaged . '">' . $firstPaged . '</a></li>';
+                    }
+                }
+                if($paged > 2){
+                    $u = $paged - 1;
+                }else{
+                    $u = 2;
+                }
+                $p = $u+2;
+                if($paged >= $total-1){
+                    $p--;
+                    $u = $p - 2;
+                    if($paged == $total){
+                        $displayLastPage = false;
+                    }
+                }
+//                echo $p; exit;
+                if($u > 2){
+                    echo "<li><a>...</a></li>";
+                }
+                for($i = $u; $i <= $p; $i++){
+                    if ($i == $paged) {
+                        echo '<li class="active"><a>' . $i . '</a></li>';
+                    }else{
+                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $i . '">' . $i . '</a></li>';
+                    }
+                }
+                if($p < $lastPaged -1){
+                    echo "<li><a>...</a></li>";
+                }
+                if($paged <= $lastPaged && $displayLastPage){
+                    if ($lastPaged == $paged) {
+                        echo '<li class="active"><a>' . $lastPaged . '</a></li>';
+                    }else {
+                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $lastPaged . '">' . $lastPaged . '</a></li>';
+                    }
+                }
+            }
+            //Next button
+            if($paged < $total){
+                echo '<li><a href="' . get_permalink() . '?page=' . $next . '" aria-label="Next"><i class="material-icons">chevron_right</i></a></li>';
+            }
+        }
     }
 }
 

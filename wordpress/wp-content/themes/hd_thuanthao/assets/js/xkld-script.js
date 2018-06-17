@@ -2,7 +2,7 @@ $(document).ready(function () {
     var pppRecruitment = 3; // Post per page
     var pageNumberRecruitment = 1;
 
-    var pppPost = 1; // Post per page
+    var pppPost = 3; // Post per page
     var pageNumberPost = 1;
 
 
@@ -16,11 +16,11 @@ $(document).ready(function () {
             data: str,
             success: function (res) {
                 var $data = $(res);
-                if ($data.length) {
+                if ($data.length > 0) {
                     $($data).insertAfter('#recruitment-append');
                     $(".recruitment-load-more").attr("disabled", false);
                 } else {
-                    $(".recruitment-load-more").attr("disabled", true);
+                    $(".recruitment-load-more").hide();
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -47,11 +47,11 @@ $(document).ready(function () {
             data: str,
             success: function (res) {
                 var $data = $(res);
-                if ($data.length) {
+                if ($data.length > 0) {
                     $($data).insertAfter('#news-append');
                     $(".news-load-more").attr("disabled", false);
                 } else {
-                    $(".news-load-more").attr("disabled", true);
+                    $(".news-load-more").hide();
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
