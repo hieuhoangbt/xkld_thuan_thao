@@ -143,7 +143,7 @@ $posts = new WP_Query($params_filter_post);
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title">
-                                        <a href="#"><?php echo the_title(); ?></a>
+                                        <a href="<?php echo the_permalink(); ?>"><?php echo the_title(); ?></a>
                                     </span>
                                     <p>
                                         <?php echo wp_trim_words(get_the_content(), 40, '...'); ?>
