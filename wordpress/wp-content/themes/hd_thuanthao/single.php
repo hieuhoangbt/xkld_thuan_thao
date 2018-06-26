@@ -86,79 +86,9 @@ get_header();
                 </div>
             </div>
             <div class="right_sidebar">
-                <div class="box-content-thumb">
-                    <h4 class="_title">
-                        tuyển dụng mới
-                    </h4>
-                    <div class="orders order_resutls">
-                        <?php
-                        if ($recruitments->have_posts()) {
-                            while ($recruitments->have_posts()) {
-                                $recruitments->the_post();
-                                $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()),
-                                    "recruitment_thumbnail");
-                                ?>
-                                <section class="item-order">
-                                    <div class="thumb_img">
-                                        <img src="<?php echo $image[0]; ?>" alt=""/>
-                                    </div>
-                                    <div class="thumb_ders">
-                                        <p class="_title">
-                                            <a href="<?php the_permalink(); ?>">
-                                                <?php the_title(); ?>
-                                            </a>
-                                        </p>
-                                    </div>
-                                </section>
-                                <?php
-                            }
-                            wp_reset_query();
-                        }
-                        ?>
-                    </div>
-                </div>
-
-                <div class="box-content-thumb">
-                    <h4 class="_title">
-                        hỏi đáp & tư vấn
-                    </h4>
-                    <div class="icon_asw">
-                        <a href="#">
-                            <img src="<?php echo HD_THUANTHAO_THEME_URL. '/assets/images/hoidap.png' ?>" alt=""/>
-                        </a>
-                    </div>
-                </div>
-                <div class="box-content-thumb">
-                    <h4 class="_title">
-                        tư vấn du học nhật bản
-                    </h4>
-                    <ul class="collection collection--content">
-                        <?php
-                        if ($advisory->have_posts()) {
-                            while ($advisory->have_posts()) {
-                                $advisory->the_post();
-                                $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()),
-                                    "recruitment_thumbnail");
-                                ?>
-                                <li class="collection-item avatar">
-                                    <img src="<?php echo $image[0]; ?>" alt="" class="circle">
-                                    <span class="title">
-                                    <a href="<?php echo the_permalink(); ?>">
-                                        <?php echo get_the_title(); ?>
-                                    </a>
-                                </span>
-                                    <p class="ders">
-                                        <?php echo wp_trim_words(get_the_content(), 15, '...'); ?>
-                                    </p>
-                                </li>
-                                <?php
-                            }
-                            wp_reset_query();
-                        }
-                        ?>
-                    </ul>
-                </div>
-
+                <?php include(locate_template('sidebar-newsrecruitment.php')); ?>
+                <?php echo HD_ThuanThao_theme::hd_thuanthao_question_and_answer(); ?>
+                <?php include(locate_template('sidebar-advisoryjapan.php')); ?>
             </div>
         </div>
     </div>

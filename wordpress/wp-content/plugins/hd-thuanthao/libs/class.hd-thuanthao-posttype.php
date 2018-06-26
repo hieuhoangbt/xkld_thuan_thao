@@ -286,11 +286,11 @@ class HDThuanThaoPosttype
     {
         $instance = self::get_instance();
         add_meta_box('recruitment', __('Custom Info', 'hdthuanthao'), function ($post) {
-            $data = get_post_meta($post->ID, 'recruitment')[0];
+            $data = get_post_meta($post->ID);
             require_once PLG_PLUGIN_DIR . '/views/backend/recruitment.php';
         }, 'recruitment', 'normal', 'core');
         add_meta_box('registrationform', __('Custom Info', 'hdthuanthao'), function ($post) {
-            $data = get_post_meta($post->ID, 'registrationform')[0];
+            $data = get_post_meta($post->ID);
             require_once PLG_PLUGIN_DIR . '/views/backend/registration-form.php';
         }, 'registrationform', 'normal', 'core');
 
@@ -335,16 +335,16 @@ class HDThuanThaoPosttype
 
     public static function list_recruitment($columns, $post_id)
     {
-        $data = get_post_meta($post_id, 'recruitment')[0];
+        $data = get_post_meta($post_id);
         switch ($columns) {
             case 'content':
                 echo get_the_content($post_id, 'content');
                 break;
             case 'company_name':
-                echo $data['company_name'];
+                echo $data['company_name'][0];
                 break;
             case 'office_address':
-                echo $data['office_address'];
+                echo $data['office_address'][0];
                 break;
         }
     }
@@ -398,11 +398,15 @@ class HDThuanThaoPosttype
         switch ($_POST['post_type']) {
             case "recruitment":
                 $data = $_POST['recruitment'];
-                update_post_meta($post_id, 'recruitment', $data);
+                foreach ($data as $key => $value) {
+                    update_post_meta($post_id, $key, $value);
+                }
                 break;
             case "registrationform":
                 $data = $_POST['registrationform'];
-                update_post_meta($post_id, 'registrationform', $data);
+                foreach ($data as $key => $value) {
+                    update_post_meta($post_id, $key, $value);
+                }
                 break;
             default:
                 break;

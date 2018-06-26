@@ -26,23 +26,23 @@ $posts = new WP_Query($params_filter_post);
 <main class="content">
     <div class="banner_home">
         <?php echo HD_ThuanThao_theme::hd_thuanthao_banner(); ?>
-        <form class="form-search">
+        <form role="search" class="form-search" method="GET" action="<?php echo site_url('/'); ?>">
             <div class="container">
                 <div class="bg-white">
                     <div class="field-input">
-                        <input type="text" placeholder="Tên công việc">
+                        <input type="text" name="s" id="s" placeholder="Tên công việc">
                     </div>
                     <div class="field-input">
-                        <input type="text" placeholder="Tên địa điểm">
+                        <input type="text" name="place" id="place" placeholder="Tên địa điểm">
                     </div>
                     <div class="field-input">
-                        <select class="browser-default">
+                        <select class="browser-default" name="country" id="country">
                             <option value="1">Nhật Bản</option>
                             <option value="2">Đài Loan</option>
                         </select>
                     </div>
                     <div class="field-input">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <button class="btn waves-effect waves-light" type="submit">
                             Tìm Kiếm
                         </button>
                     </div>
@@ -159,9 +159,9 @@ $posts = new WP_Query($params_filter_post);
                 <input type="hidden" id="news-append">
             </div>
             <?php if (wp_count_posts('post')->publish > $newsPerPage) { ?>
-            <div class="text-center load_card">
-                <a class="btn-loadmore news-load-more" href="#">xem thêm</a>
-            </div>
+                <div class="text-center load_card">
+                    <a class="btn-loadmore news-load-more" href="#">xem thêm</a>
+                </div>
             <?php } ?>
         </div>
     </div>
