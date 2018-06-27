@@ -2,6 +2,31 @@
 /*
  * Template Name: Dịch Vụ
  */
+if (isset($_POST) && !empty($_POST)) {
+    $nonce = $_REQUEST['_wpnonce'];
+    if (!wp_verify_nonce($nonce, 'submit_register_form')) {
+        $errs[] = "Form submit invalid!"; // Get out of here, the nonce is rotten!
+    } else {
+        $arrPost = [
+                'post_author' => 1,
+                'post_title' =>  'registration for ' . $_POST['full_name'],
+                'post_status' =>  'publish',
+                'post_type' =>  'information',
+        ];
+        $postId = wp_insert_post($arrPost);
+        $postMeta = [
+                'full_name',
+                'address',
+                'phone_number',
+                'email',
+                'introduce',
+        ];
+        foreach ($postMeta as $field) {
+            update_post_meta($postId, $field, $_POST[$field]);
+        }
+    }
+}
+
 if (get_query_var('paged')) {
     $paged = get_query_var('paged');
 } else {
@@ -131,14 +156,14 @@ $cultureNews = new WP_Query($params_filter_culture_news);
                 </div>
                 <div class="box-content-thumb">
                     <h4 class="_title">gửi thông tin đăng ký</h4>
-                    <form class="col s12" name="register_form" method="post">
+                    <form class="col s12" action="<?php the_permalink(); ?>" name="register_form" method="post">
                         <div class="form_question">
                             <div class="row">
                                 <div class="input-field col s3">
-                                    <label for="user_name">Họ Tên <span>*</span></label>
+                                    <label for="full_name">Họ Tên <span>*</span></label>
                                 </div>
                                 <div class="input-field col s9">
-                                    <input id="user_name" name="user_name" type="text" class="validate" placeholder="" required>
+                                    <input id="full_name" name="full_name" type="text" class="validate" placeholder="" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -151,10 +176,10 @@ $cultureNews = new WP_Query($params_filter_culture_news);
                             </div>
                             <div class="row">
                                 <div class="input-field col s3">
-                                    <label for="phone">Điện Thoại<span>*</span></label>
+                                    <label for="phone_number">Điện Thoại<span>*</span></label>
                                 </div>
                                 <div class="input-field col s9">
-                                    <input id="phone" name="phone" type="text" class="validate" placeholder="" required>
+                                    <input id="phone_number" name="phone_number" type="text" class="validate" placeholder="" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -177,6 +202,7 @@ $cultureNews = new WP_Query($params_filter_culture_news);
                                 gửi <i class="material-icons right">send</i>
                             </button>
                         </div>
+                        <?php wp_nonce_field('submit_register_form'); ?>
                     </form>
                 </div>
             </div>

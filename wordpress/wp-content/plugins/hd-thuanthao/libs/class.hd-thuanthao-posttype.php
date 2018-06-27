@@ -351,25 +351,25 @@ class HDThuanThaoPosttype
 
     public static function list_register_information($columns, $post_id)
     {
-        $data = get_post_meta($post_id, 'registerinformation')[0];
+        $data = get_post_meta($post_id);
         switch ($columns) {
             case 'full_name':
-                echo $data['full_name'];
+                echo $data['full_name'][0];
                 break;
             case 'address':
-                echo $data['address'];
+                echo $data['address'][0];
                 break;
             case 'phone_number':
-                echo $data['phone_number'];
+                echo $data['phone_number'][0];
                 break;
             case 'email':
-                echo $data['email'];
+                echo $data['email'][0];
                 break;
             case 'introduce':
-                echo $data['introduce'];
+                echo $data['introduce'][0];
                 break;
-            case 'introduce':
-                echo '<a href="' . $data['document'] . '">Download Document</a>';
+            case 'document':
+                echo '<a href="' . $data['document'][0] . '">Download Document</a>';
                 break;
         }
     }
