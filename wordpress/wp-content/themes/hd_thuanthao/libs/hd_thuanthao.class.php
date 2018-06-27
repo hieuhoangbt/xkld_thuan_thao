@@ -10,6 +10,7 @@ class HD_ThuanThao_theme
             add_image_size('recruitment_thumbnail', 168, 126, array('center', 'center'));
             add_image_size('highlight_thumbnail', 356, 267, array('center', 'center'));
             add_image_size('news_thumbnail', 737, 458, array('center', 'center'));
+            add_image_size('search_thumbnail', 144, 33, array('center', 'center'));
         });
         //Register menu
         add_action('init', function () {
@@ -48,6 +49,7 @@ class HD_ThuanThao_theme
         add_action('wp_ajax_nopriv_more_post_ajax', 'more_post_ajax');
         add_action('wp_ajax_more_post_ajax', 'more_post_ajax');
 
+
         add_filter('nav_menu_css_class', 'special_nav_class', 10, 2);
     }
 
@@ -78,6 +80,14 @@ class HD_ThuanThao_theme
             get_bloginfo('name'));
     }
 
+    public static function hd_thuanthao_question_and_answer()
+    {
+        printf('<div class="box-content-thumb"><h4 class="_title">hỏi đáp & tư vấn</h4><div class="icon_asw"><a href="#"><img src="%s" alt="%s"/></a></div></div>',
+            HD_THUANTHAO_THEME_URL . '/assets/images/hoidap.png',
+            get_bloginfo('name'));
+    }
+
+
     public static function hd_thuanthao_menu()
     {
         return wp_nav_menu(array(
@@ -93,73 +103,74 @@ class HD_ThuanThao_theme
         ));
     }
 
-    public static function pagination($total, $paged){
-        if($total > 1){
+    public static function pagination($total, $paged)
+    {
+        if ($total > 1) {
             $next = $paged + 1;
             $pre = $paged - 1;
             $firstPaged = 1;
             $lastPaged = $total;
             $displayLastPage = true;
             //Pre button
-            if($paged > 1){
+            if ($paged > 1) {
                 echo '<li><a href=" ' . get_permalink() . '?page=' . $pre . '"><i class="material-icons">chevron_left</i></a></li>';
             }
             /**
              * Paging
              */
-            if($total < 5){
-                for($i = 1; $i <= $total; $i++){
+            if ($total < 5) {
+                for ($i = 1; $i <= $total; $i++) {
                     if ($i == $paged) {
                         echo '<li class="active"><a>' . $i . '</a></li>';
-                    }else{
+                    } else {
                         echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $i . '">' . $i . '</a></li>';
                     }
                 }
-            }else{
-                if($paged >= 1){
+            } else {
+                if ($paged >= 1) {
                     if ($firstPaged == $paged) {
                         echo '<li class="active"><a>' . $firstPaged . '</a></li>';
-                    }else{
+                    } else {
                         echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $firstPaged . '">' . $firstPaged . '</a></li>';
                     }
                 }
-                if($paged > 2){
+                if ($paged > 2) {
                     $u = $paged - 1;
-                }else{
+                } else {
                     $u = 2;
                 }
-                $p = $u+2;
-                if($paged >= $total-1){
+                $p = $u + 2;
+                if ($paged >= $total - 1) {
                     $p--;
                     $u = $p - 2;
-                    if($paged == $total){
+                    if ($paged == $total) {
                         $displayLastPage = false;
                     }
                 }
 //                echo $p; exit;
-                if($u > 2){
+                if ($u > 2) {
                     echo "<li><a>...</a></li>";
                 }
-                for($i = $u; $i <= $p; $i++){
+                for ($i = $u; $i <= $p; $i++) {
                     if ($i == $paged) {
                         echo '<li class="active"><a>' . $i . '</a></li>';
-                    }else{
+                    } else {
                         echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $i . '">' . $i . '</a></li>';
                     }
                 }
-                if($p < $lastPaged -1){
+                if ($p < $lastPaged - 1) {
                     echo "<li><a>...</a></li>";
                 }
-                if($paged <= $lastPaged && $displayLastPage){
+                if ($paged <= $lastPaged && $displayLastPage) {
                     if ($lastPaged == $paged) {
                         echo '<li class="active"><a>' . $lastPaged . '</a></li>';
-                    }else {
+                    } else {
                         echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $lastPaged . '">' . $lastPaged . '</a></li>';
                     }
                 }
             }
             //Next button
-            if($paged < $total){
+            if ($paged < $total) {
                 echo '<li><a href="' . get_permalink() . '?page=' . $next . '" aria-label="Next"><i class="material-icons">chevron_right</i></a></li>';
             }
         }
@@ -250,3 +261,4 @@ function more_post_ajax()
     wp_reset_postdata();
     wp_die($out);
 }
+
