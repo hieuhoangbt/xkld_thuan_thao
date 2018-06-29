@@ -4,12 +4,24 @@ $job_name = $_GET['s'];
 $place = $_GET['place'];
 $country = ($_GET['country'] == 1) ? "Nhật Bản" : "Đài Loan";
 
+if (get_query_var('paged')) {
+    $paged = get_query_var('paged');
+} else {
+    if (get_query_var('page')) {
+        $paged = get_query_var('page');
+    } else {
+        $paged = 1;
+    }
+}
+
 $args = array(
+    'posts_per_page' => 1,
     'post_type' => 'recruitment',
     's' => $job_name,
     'post_status' => 'publish',
     'orderby' => 'title',
     'order' => 'ASC',
+    'paged' => $paged
 );
 if (!empty($place)) {
     $args['meta_query'] = [
@@ -100,13 +112,10 @@ $recruitment_wp = new WP_Query($args);
                 </div>
                 <div class="text-center pagi_result">
                     <ul class="pagination">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="active"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!">2</a></li>
-                        <li class="waves-effect"><a href="#!">3</a></li>
-                        <li class="waves-effect"><a href="#!">4</a></li>
-                        <li class="waves-effect"><a href="#!">5</a></li>
-                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                        <?php
+                        $total = $recruitment_wp->max_num_pages;
+                        HD_ThuanThao_theme::pagination($total, $paged);
+                        ?>
                     </ul>
                 </div>
             </div>
