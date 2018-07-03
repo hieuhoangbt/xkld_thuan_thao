@@ -5,6 +5,7 @@
   align-items: center;
   padding: 25px;
   cursor: pointer;
+  position: relative;
   &--img {
     margin-right: 10px;
   }
@@ -28,4 +29,16 @@
   margin: 15px auto 0px auto;
   background: #ffac00;
   box-shadow: none;
+}
+.file_uploader {
+  border: solid 1px red;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 9999;
+  cursor: pointer;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
 }
