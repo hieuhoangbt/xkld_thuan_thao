@@ -57,7 +57,7 @@ class HDThuanThaoPosttype
 
         //Display list product
         add_action('manage_recruitment_posts_custom_column', array($instance, 'list_recruitment'), 10, 2);
-        add_action('manage_register_information_posts_custom_column', array($instance, 'list_information'), 10, 2);
+        add_action('manage_information_posts_custom_column', array($instance, 'list_information'), 10, 2);
         add_action('manage_registration_form_posts_custom_column',
             array($instance, 'list_registration_form'), 10, 2);
 
@@ -349,7 +349,7 @@ class HDThuanThaoPosttype
         }
     }
 
-    public static function list_register_information($columns, $post_id)
+    public static function list_information($columns, $post_id)
     {
         $data = get_post_meta($post_id);
         switch ($columns) {
@@ -369,7 +369,9 @@ class HDThuanThaoPosttype
                 echo $data['introduce'][0];
                 break;
             case 'document':
-                echo '<a href="' . $data['document'][0] . '">Download Document</a>';
+                if(!empty($data['document'][0])) {
+                    echo '<a href="' . $data['document'][0] . '">Download Document</a>';
+                }
                 break;
         }
     }

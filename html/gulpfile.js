@@ -23,7 +23,7 @@ gulp.task('hello', function() {
 // Start browserSync server
 gulp.task('browserSync', function() {
     browserSync({
-        port: 555,
+//        port: 555,
         server: {
             baseDir: 'app'
         }
@@ -60,7 +60,7 @@ gulp.task('useref', function() {
         .pipe(gulpIf('*.js', uglify()))
         .pipe(gulpIf('*.css', cssnano()))
         .pipe(gulp.dest('dist'));
-});
+})
 
 // Optimizing Images 
 gulp.task('images', function() {
