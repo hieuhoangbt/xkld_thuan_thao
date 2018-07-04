@@ -108,11 +108,11 @@ get_header();
                                 [Tải lên file đăng ký ứng tuyển]
                             </p>
                             <div class="box_dash_link">
-                                <input type="file" name="register_file"/>
                                 <img class="box_dash_link--img"
                                      src="<?php echo HD_THUANTHAO_THEME_URL . '/assets/images/cloud-storage-download.png' ?>"
-                                     alt=""/>
+                                alt=""/>
                                 <p class="box_dash_link--title">Tải lên file đăng ký ứng tuyển</p>
+                                <input type="file" name="register_file" class="file_uploader"/>
                             </div>
                             <button class="btn waves-effect waves-light btn_submit" type="submit" name="action">
                                 gửi

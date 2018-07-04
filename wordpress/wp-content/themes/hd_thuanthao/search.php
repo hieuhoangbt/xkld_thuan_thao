@@ -15,7 +15,7 @@ if (get_query_var('paged')) {
 }
 
 $args = array(
-    'posts_per_page' => 1,
+    'posts_per_page' => 8,
     'post_type' => 'recruitment',
     's' => $job_name,
     'post_status' => 'publish',
@@ -43,6 +43,10 @@ if (!empty($country)) {
 }
 
 $recruitment_wp = new WP_Query($args);
+$countryList = [
+        'Nhật Bản',
+        'Đài Loan'
+];
 ?>
 <main class="content">
     <div class="search-result">
@@ -50,19 +54,24 @@ $recruitment_wp = new WP_Query($args);
             <div class="container">
                 <div class="bg-white">
                     <div class="field-input">
-                        <input type="text" placeholder="Tên công việc">
+                        <input type="text" name="s" value="<?php echo $job_name ?>" placeholder="Tên công việc">
                     </div>
                     <div class="field-input">
-                        <input type="text" placeholder="Tên địa điểm">
+                        <input type="text" name="place" value="<?php echo $place ?>" placeholder="Tên địa điểm">
                     </div>
                     <div class="field-input">
-                        <select class="browser-default">
-                            <option value="1">Nhật Bản</option>
-                            <option value="2">Đài Loan</option>
+                        <select name="country" class="browser-default">
+                            <?php
+                                foreach ($countryList as $key => $item) {
+                                    $val = $key + 1;
+                                    $selected = $val == $_GET['country'] ? 'selected' : '';
+                                    echo '<option value="' . $val . '" ' . $selected . '>' . $item . '</option>';
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="field-input">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <button class="btn waves-effect waves-light" type="submit">
                             Tìm Kiếm
                         </button>
                     </div>
@@ -114,7 +123,12 @@ $recruitment_wp = new WP_Query($args);
                     <ul class="pagination">
                         <?php
                         $total = $recruitment_wp->max_num_pages;
-                        HD_ThuanThao_theme::pagination($total, $paged);
+                            $arrQuery = [
+                                    's' => $job_name,
+                                    'place' => $place,
+                                    'country' => $_GET['country'],
+                            ];
+                        HD_ThuanThao_theme::pagination($total, $paged, 'search', $arrQuery);
                         ?>
                     </ul>
                 </div>
