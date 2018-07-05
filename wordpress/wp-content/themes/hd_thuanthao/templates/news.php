@@ -98,16 +98,7 @@ $newsEvent = new WP_Query($params_filter_news_and_event);
                     </div>
                 </div>
                 <div class="right_sidebar">
-                    <div class="box-content-thumb">
-                        <h4 class="_title">
-                            hỏi đáp & tư vấn
-                        </h4>
-                        <div class="icon_asw">
-                            <a href="#">
-                                <img src="<?php echo HD_THUANTHAO_THEME_URL . '/assets/images/hoidap.png' ?>" alt=""/>
-                            </a>
-                        </div>
-                    </div>
+                    <?php include(locate_template('sidebar-question.php')); ?>
                     <?php include(locate_template('sidebar-guidestudy.php')); ?>
                     <?php include(locate_template('sidebar-advisoryjapan.php')); ?>
 

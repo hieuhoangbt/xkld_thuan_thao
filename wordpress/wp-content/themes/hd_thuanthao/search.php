@@ -134,71 +134,8 @@ $countryList = [
                 </div>
             </div>
             <div class="right_sidebar">
-                <div class="box-content-thumb">
-                    <h4 class="_title">
-                        cẩm nang lao động du học nhật bản
-                    </h4>
-                    <ul class="collection collection--content">
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="#">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="box-content-thumb">
-                    <h4 class="_title">
-                        hỏi đáp & tư vấn
-                    </h4>
-                    <div class="icon_asw">
-                        <a href="#">
-                            <img src="images/hoidap.png" alt=""/>
-                        </a>
-                    </div>
-                </div>
+                <?php include(locate_template('sidebar-guidestudy.php')); ?>
+                <?php include(locate_template('sidebar-question.php')); ?>
             </div>
         </div>
     </div>
