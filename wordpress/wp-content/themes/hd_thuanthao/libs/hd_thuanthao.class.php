@@ -20,14 +20,16 @@ class HD_ThuanThao_theme
 
         add_action('wp_enqueue_scripts', function () {
             //Insert style
-            wp_register_style('main', HD_THUANTHAO_THEME_URL . '/assets/css/main.css');
-            wp_enqueue_style('main');
+            wp_enqueue_style('main', HD_THUANTHAO_THEME_URL . '/assets/css/main.css');
+
+            wp_enqueue_style('slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
 
             //Insert script
+            wp_enqueue_script('jquery');
             wp_register_script('start', HD_THUANTHAO_THEME_URL . '/assets/js/start.js');
             wp_enqueue_script('start');
 
-            wp_register_script('slick', 'http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
+            wp_register_script('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
             wp_enqueue_script('slick');
 
             wp_register_script('xkld-script', HD_THUANTHAO_THEME_URL . '/assets/js/xkld-script.js');
@@ -103,7 +105,7 @@ class HD_ThuanThao_theme
         ));
     }
 
-    public static function pagination($total, $paged)
+    public static function pagination($total, $paged, $link = null, $query = null)
     {
         if ($total > 1) {
             $next = $paged + 1;
@@ -111,9 +113,16 @@ class HD_ThuanThao_theme
             $firstPaged = 1;
             $lastPaged = $total;
             $displayLastPage = true;
+            $link = $link ? $link : get_permalink();
+            if ($link == 'search') {
+                $link = '';
+            }
+            if ($query) {
+                $query = '&' . http_build_query($query);
+            }
             //Pre button
             if ($paged > 1) {
-                echo '<li><a href=" ' . get_permalink() . '?page=' . $pre . '"><i class="material-icons">chevron_left</i></a></li>';
+                echo '<li><a href=" ' . $link . '?page=' . $pre . $query . '"><i class="material-icons">chevron_left</i></a></li>';
             }
             /**
              * Paging
@@ -123,7 +132,7 @@ class HD_ThuanThao_theme
                     if ($i == $paged) {
                         echo '<li class="active"><a>' . $i . '</a></li>';
                     } else {
-                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $i . '">' . $i . '</a></li>';
+                        echo '<li class="waves-effect"><a href=" ' . $link . '?page=' . $i . $query .'">' . $i . '</a></li>';
                     }
                 }
             } else {
@@ -131,7 +140,7 @@ class HD_ThuanThao_theme
                     if ($firstPaged == $paged) {
                         echo '<li class="active"><a>' . $firstPaged . '</a></li>';
                     } else {
-                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $firstPaged . '">' . $firstPaged . '</a></li>';
+                        echo '<li class="waves-effect"><a href=" ' . $link . '?page=' . $firstPaged . $query . '">' . $firstPaged . '</a></li>';
                     }
                 }
                 if ($paged > 2) {
@@ -147,7 +156,6 @@ class HD_ThuanThao_theme
                         $displayLastPage = false;
                     }
                 }
-//                echo $p; exit;
                 if ($u > 2) {
                     echo "<li><a>...</a></li>";
                 }
@@ -155,7 +163,7 @@ class HD_ThuanThao_theme
                     if ($i == $paged) {
                         echo '<li class="active"><a>' . $i . '</a></li>';
                     } else {
-                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $i . '">' . $i . '</a></li>';
+                        echo '<li class="waves-effect"><a href=" ' . $link . '?page=' . $i . $query . '">' . $i . '</a></li>';
                     }
                 }
                 if ($p < $lastPaged - 1) {
@@ -165,13 +173,13 @@ class HD_ThuanThao_theme
                     if ($lastPaged == $paged) {
                         echo '<li class="active"><a>' . $lastPaged . '</a></li>';
                     } else {
-                        echo '<li class="waves-effect"><a href=" ' . get_permalink() . '?page=' . $lastPaged . '">' . $lastPaged . '</a></li>';
+                        echo '<li class="waves-effect"><a href=" ' . $link . '?page=' . $lastPaged . $query . '">' . $lastPaged . '</a></li>';
                     }
                 }
             }
             //Next button
             if ($paged < $total) {
-                echo '<li><a href="' . get_permalink() . '?page=' . $next . '" aria-label="Next"><i class="material-icons">chevron_right</i></a></li>';
+                echo '<li><a href="' . $link . '?page=' . $next . $query. '" aria-label="Next"><i class="material-icons">chevron_right</i></a></li>';
             }
         }
     }

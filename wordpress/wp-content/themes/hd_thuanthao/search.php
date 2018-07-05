@@ -4,12 +4,24 @@ $job_name = $_GET['s'];
 $place = $_GET['place'];
 $country = ($_GET['country'] == 1) ? "Nhật Bản" : "Đài Loan";
 
+if (get_query_var('paged')) {
+    $paged = get_query_var('paged');
+} else {
+    if (get_query_var('page')) {
+        $paged = get_query_var('page');
+    } else {
+        $paged = 1;
+    }
+}
+
 $args = array(
+    'posts_per_page' => 8,
     'post_type' => 'recruitment',
     's' => $job_name,
     'post_status' => 'publish',
     'orderby' => 'title',
     'order' => 'ASC',
+    'paged' => $paged
 );
 if (!empty($place)) {
     $args['meta_query'] = [
@@ -31,6 +43,10 @@ if (!empty($country)) {
 }
 
 $recruitment_wp = new WP_Query($args);
+$countryList = [
+        'Nhật Bản',
+        'Đài Loan'
+];
 ?>
 <main class="content">
     <div class="search-result">
@@ -38,19 +54,24 @@ $recruitment_wp = new WP_Query($args);
             <div class="container">
                 <div class="bg-white">
                     <div class="field-input">
-                        <input type="text" placeholder="Tên công việc">
+                        <input type="text" name="s" value="<?php echo $job_name ?>" placeholder="Tên công việc">
                     </div>
                     <div class="field-input">
-                        <input type="text" placeholder="Tên địa điểm">
+                        <input type="text" name="place" value="<?php echo $place ?>" placeholder="Tên địa điểm">
                     </div>
                     <div class="field-input">
-                        <select class="browser-default">
-                            <option value="1">Nhật Bản</option>
-                            <option value="2">Đài Loan</option>
+                        <select name="country" class="browser-default">
+                            <?php
+                                foreach ($countryList as $key => $item) {
+                                    $val = $key + 1;
+                                    $selected = $val == $_GET['country'] ? 'selected' : '';
+                                    echo '<option value="' . $val . '" ' . $selected . '>' . $item . '</option>';
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="field-input">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <button class="btn waves-effect waves-light" type="submit">
                             Tìm Kiếm
                         </button>
                     </div>
@@ -100,82 +121,21 @@ $recruitment_wp = new WP_Query($args);
                 </div>
                 <div class="text-center pagi_result">
                     <ul class="pagination">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="active"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!">2</a></li>
-                        <li class="waves-effect"><a href="#!">3</a></li>
-                        <li class="waves-effect"><a href="#!">4</a></li>
-                        <li class="waves-effect"><a href="#!">5</a></li>
-                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                        <?php
+                        $total = $recruitment_wp->max_num_pages;
+                            $arrQuery = [
+                                    's' => $job_name,
+                                    'place' => $place,
+                                    'country' => $_GET['country'],
+                            ];
+                        HD_ThuanThao_theme::pagination($total, $paged, 'search', $arrQuery);
+                        ?>
                     </ul>
                 </div>
             </div>
             <div class="right_sidebar">
-                <div class="box-content-thumb">
-                    <h4 class="_title">
-                        cẩm nang lao động du học nhật bản
-                    </h4>
-                    <ul class="collection collection--content">
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="#">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <img src="images/Layer%2019%20copy%202.png" alt="" class="circle">
-                            <span class="title">
-                                    <a href="">
-                                        Du học sinh tại Nhật Bản sẽ bị quản lý giờ làm thêm?
-                                    </a>
-                                </span>
-                            <p class="ders">
-                                Cục Xuất nhập cảnh Nhật Bản đã quy định
-                                giờ làm thêm tối đa đối với du học sinh...
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="box-content-thumb">
-                    <h4 class="_title">
-                        hỏi đáp & tư vấn
-                    </h4>
-                    <div class="icon_asw">
-                        <a href="#">
-                            <img src="images/hoidap.png" alt=""/>
-                        </a>
-                    </div>
-                </div>
+                <?php include(locate_template('sidebar-guidestudy.php')); ?>
+                <?php include(locate_template('sidebar-question.php')); ?>
             </div>
         </div>
     </div>
